@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="row">
+    <div class="panel">
+      <div class="panel-heading"><h2>Edit Member Image</h2></div>
+      <div class="panel-body" style="margin-bottom:20px">
+        <div class="col-md-6 col-cm-12">
+          <div #videoMediaContainer class="media-container" (window:resize)="onResize(videoMediaContainer.getBoundingClientRect())">
+            <video #videoCanvas id="videoElement" [style.width.px]="videoContainerWidth" [style.height.px]="videoContainerHeight" autoplay></video>
+          </div>
+          <div>
+            <button #captureButton class="btn btn-default" (click)="captureImage()">Capture Image</button>
+          </div>
+        </div>
+        <div class="col-md-6 col-cm-12">
+          <div class="media-container">
+            <canvas #pictureCanvas  id="canvasElement" [style.width.px]="videoContainerWidth" [style.height.px]="videoContainerHeight"></canvas>
+          </div>
+          <div>
+            <button #saveButton class="btn btn-default" (click)="saveImage()">Save Image</button>
+            <div *ngIf="fileUploadSuccess" class="alert alert-success" style="margin-top:5px;">
+              <div>{{ fileUploadMessage }}</div>
+            </div>
+            <div *ngIf="fileUploadFail" class="alert alert-danger" style="margin-top:5px;">
+              <div>{{ fileUploadMessage }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!--panel-->
+  </div><!--row-->
+</div><!--container-->

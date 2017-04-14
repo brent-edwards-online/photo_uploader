@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background: #000;
+  color: #2ce02c
+}
+
+div.panel, div.panel-header, div.panel-footer {
+  background: #000;
+  border-color: #fff;
+}
+
+.panel-body {
+  padding: 0px;
+}
+
+h2 {
+  padding-top: 0px;
+  margin-top: 5px;
+}

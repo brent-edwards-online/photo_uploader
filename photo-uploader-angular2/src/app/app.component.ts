@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { SearchParams } from './models/search-params.model';
+import {ToasterContainerComponent, ToasterService, ToasterConfig} from 'angular2-toaster/angular2-toaster';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Photo Uploader';
+
+  public searchData = new SearchParams();
 }

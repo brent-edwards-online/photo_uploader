@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="panel">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <div class="panel-heading"><h2>Enter Member Search Parameters</h2></div>
+
+        <div class="panel-body">
+          
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="firstname">First name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="Enter first name" [(ngModel)]="searchParams.firstname" name="firstname">
+          </div>
+            
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="lastname">Last name</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Enter last name" [(ngModel)]="searchParams.lastname" name="lastname">
+          </div>
+
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Enter email" [(ngModel)]="searchParams.email" name="email"  #email="ngModel">
+          </div>
+        
+          <div class="form-group col-lg-3 col-md-6">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" placeholder="Enter phone" [(ngModel)]="searchParams.phone" name="phone">
+          </div>
+        </div><!--panel body-->
+
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-primary pull-right">Search</button>
+          <div class="clearfix"></div>
+        </div><!--panel-footer-->
+      </form>
+    </div> <!--panel-->
+  </div> <!--row-->
+</div> <!--container-->
