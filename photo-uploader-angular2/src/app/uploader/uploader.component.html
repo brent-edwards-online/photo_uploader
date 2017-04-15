@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="text-center">
+    <h1>{{title}}</h1>
+  </div>
+  <!--
+  <toaster-container></toaster-container>
+  -->
+  <app-search-fields (searchParamsEvent)="searchData=$event"></app-search-fields>
+  <app-search-results [searchParams]='searchData'></app-search-results>
+  <app-image></app-image>
+</div>

@@ -1,2 +1,3 @@
 photo-uploader-angular2/dist/
 photo-uploader-angular2/node_modules/
+photo-uploader-angular2/src/app/config.ts

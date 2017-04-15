@@ -8,7 +8,24 @@ import { RegisterComponent } from './register/register.component';
 import { SearchFieldsComponent } from './search-fields/search-fields.component';
 import { ImageComponent } from './image/image.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { HomeComponent } from './home/home.component';
+import { UploaderComponent } from './uploader/uploader.component';
+
+import { routes } from './app.router';
+import { AuthenticationService } from './service/authentication.service';
+import { LocalStorage } from "angular2-localstorage/WebStorage";
+import { AuthenticationRouteGuard } from './routeguards/authentication.routeguard'
 import { ToasterModule, ToasterService} from 'angular2-toaster';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Http } from '@angular/http';
+
+// Set tokenGetter to use the same storage in AuthenticationService.Helpers.
+export function getAuthHttp(http: Http) {
+    return new AuthHttp(new AuthConfig({
+        noJwtError: false,
+        tokenGetter: (() => localStorage.getItem('id_token'))
+    }), http);
+}
 
 @NgModule({
   declarations: [
@@ -17,15 +34,27 @@ import { ToasterModule, ToasterService} from 'angular2-toaster';
     RegisterComponent,
     SearchFieldsComponent,
     ImageComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    HomeComponent,
+    UploaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    ToasterModule
+    ToasterModule,
+    routes
   ],
-  providers: [ToasterService],
+  providers: [
+        AuthenticationService,
+        AuthenticationRouteGuard,
+        ToasterService,
+        {
+            provide: AuthHttp,
+            useFactory: getAuthHttp,
+            deps: [Http]
+        }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
