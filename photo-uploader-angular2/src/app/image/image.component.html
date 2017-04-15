@@ -8,7 +8,7 @@
             <video #videoCanvas id="videoElement" [style.width.px]="videoContainerWidth" [style.height.px]="videoContainerHeight" autoplay></video>
           </div>
           <div>
-            <button #captureButton class="btn btn-default" (click)="captureImage()">Capture Image</button>
+            <button #captureButton class="btn btn-success" (click)="captureImage()">Capture Image</button>
           </div>
         </div>
         <div class="col-md-6 col-cm-12">
@@ -16,13 +16,7 @@
             <canvas #pictureCanvas  id="canvasElement" [style.width.px]="videoContainerWidth" [style.height.px]="videoContainerHeight"></canvas>
           </div>
           <div>
-            <button [disabled]='!currentMember' #saveButton class="btn btn-default" (click)="saveImage()">Save Image</button>
-            <div *ngIf="fileUploadSuccess" class="alert alert-success" style="margin-top:5px;">
-              <div>{{ fileUploadMessage }}</div>
-            </div>
-            <div *ngIf="fileUploadFail" class="alert alert-danger" style="margin-top:5px;">
-              <div>{{ fileUploadMessage }}</div>
-            </div>
+            <button [disabled]='!currentMember' #saveButton class="btn btn-warning" (click)="saveImage()">Save Image</button>
           </div>
         </div>
       </div>

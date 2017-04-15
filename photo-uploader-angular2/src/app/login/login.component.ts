@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginParams } from '../models/login-params.model';
-import { NgForm } from "@angular/forms"
+import { NgForm } from "@angular/forms";
 import { AuthenticationService } from "../service/authentication.service";
 import { Observable } from 'rxjs/Observable';
 import { Response } from '@angular/http';
@@ -12,12 +12,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginParams = new LoginParams();
-  emailRegEx ="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
-  isSignedIn: boolean;
-  errorMessage: string;
-
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+  private loginParams = new LoginParams();
+  private emailRegEx ="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$";
+  private isSignedIn = false;
+  private errorMessage = '';
+  
+  constructor(private authenticationService: AuthenticationService, private router: Router) { 
+      this.authenticationService.signinSubject.subscribe((value) => {
+            this.isSignedIn = value;
+            console.log("Subscription got", value); 
+        });
+  }
 
   ngOnInit() {
   }
@@ -56,6 +61,11 @@ export class LoginComponent implements OnInit {
                     this.errorMessage = "Server error. Try again later.";
                 }
             });
+  }
+
+  logout(){
+      this.isSignedIn = false;
+      this.authenticationService.signout();
   }
 
   onSubmit(form: NgForm){

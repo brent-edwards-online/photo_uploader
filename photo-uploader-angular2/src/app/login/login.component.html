@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" [hidden]="isSignedIn">
   <div class="text-center">
     <h1>{{title}}</h1>
   </div>
   <div class="row">
     <div class="col-sm-12 col-md-6 col-md-offset-3">
       <div class="panel">
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+        <form #f="ngForm">
           <div class="panel-heading"><h2>Login</h2></div>
 
           <div class="panel-body">
@@ -31,6 +31,29 @@
             <div class="clearfix"></div>
           </div><!--panel-footer-->
         </form>
+      </div> <!--panel-->
+    </div>
+  </div> <!--row-->
+</div> <!--container-->
+
+<div class="container" [hidden]="!isSignedIn">
+  <div class="text-center">
+    <h1>{{title}}</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-md-offset-3">
+      <div class="panel">
+        
+          <div class="panel-heading"><h2>Logout</h2></div>
+
+          <div class="panel-body text-center">
+            <h2>Thanks for visiting</h2>
+          </div>
+          <div class="panel-footer">
+            <button type="submit" (click)="logout()" class="btn btn-primary pull-right">Logout</button>
+            <div class="clearfix"></div>
+          </div><!--panel-footer-->
+        
       </div> <!--panel-->
     </div>
   </div> <!--row-->
