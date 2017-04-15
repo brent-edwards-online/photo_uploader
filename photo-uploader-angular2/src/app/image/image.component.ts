@@ -74,22 +74,19 @@ export class ImageComponent implements OnInit {
           showCloseButton: true,
         };
         this.toasterService.pop(toast);
+
+        let canvas = this.picture.nativeElement;
+        let context = canvas.getContext("2d");
+        context.fillStyle = "#000000";
+        context.fillRect(0, 0, canvas.width, canvas.height);
       }
       else{
-        var context = this.picture.nativeElement.getContext("2d");
-        var img = new Image();
+        let context = this.picture.nativeElement.getContext("2d");
+        let img = new Image();
         img.src = response.Body;
         img.onload = function() {
           context.drawImage(img, 0, 0);
         }
-
-        var toast : Toast = {
-          type: 'success',
-          title: 'S3 Download Success',
-          body: 'Download from S3 success',
-          showCloseButton: true,
-        };
-        this.toasterService.pop(toast);
       }
     }
 
@@ -106,8 +103,6 @@ export class ImageComponent implements OnInit {
     let _video=this.video.nativeElement;
     canvas.getContext('2d').drawImage(_video, 0, 0, canvas.width, canvas.height);
   }
-
-  imagedata: any;
 
   saveImage() {
     let canvas = this.picture.nativeElement;

@@ -27,7 +27,9 @@ export class SearchResultsComponent implements OnInit {
     let param : SearchParams = changes['searchParams'].currentValue; 
 
     if( param.email.length == 0 && param.phone.length == 0 && param.firstname.length == 0 && param.lastname.length == 0 ){
+      this.selectedRow = -1;
       this.searchResults = [];
+      this.selectedMemberEvent.emit("");
       return;
     }
 

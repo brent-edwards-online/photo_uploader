@@ -16,7 +16,7 @@
             <canvas #pictureCanvas  id="canvasElement" [style.width.px]="videoContainerWidth" [style.height.px]="videoContainerHeight"></canvas>
           </div>
           <div>
-            <button #saveButton class="btn btn-default" (click)="saveImage()">Save Image</button>
+            <button [disabled]='!currentMember' #saveButton class="btn btn-default" (click)="saveImage()">Save Image</button>
             <div *ngIf="fileUploadSuccess" class="alert alert-success" style="margin-top:5px;">
               <div>{{ fileUploadMessage }}</div>
             </div>
