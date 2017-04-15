@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-body {
+body, .navbar-default, .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
   background: #000;
   color: #2ce02c
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:active {
+  color: #fff
 }
 
 div.panel, div.panel-header, div.panel-footer {

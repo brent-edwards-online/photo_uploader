@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SearchResults } from '../models/search-results.model';
 import { SearchParams } from '../models/search-params.model';
+import { Config } from '../config';
+
 @Injectable()
 export class MemberService {
   public members: SearchResults[] = [
@@ -51,7 +53,9 @@ export class MemberService {
   constructor() { }
   
   getMembers(searchParams: SearchParams) {
-    return this.members.filter( m => m.firstname === searchParams.firstname)
+    //return this.members.filter( m => m.firstname === searchParams.firstname)
+    let endPoint: string = Config.AUTHORIZATION_URL;
+    return this.authHttp.get( endPoint + '/api/qualification').map((res:Response) => res.json());
   }
 
   saveImage() {

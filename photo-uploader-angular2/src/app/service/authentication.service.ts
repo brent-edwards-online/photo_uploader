@@ -8,22 +8,13 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/timer';
 import { AuthHttp } from 'angular2-jwt';
-
+import { Config } from '../config';
 /**
  * ROPC Authentication service.
  */
 @Injectable() export class AuthenticationService {
 
-    private readonly AUTHORIZATION_URL: string = "https://careerhub.brentedwardsonline.com";
-    //public static readonly AUTHORIZATION_URL: string = "http://localhost:5000";
-    public readonly TOKEN_ENDPOINT: string = "/connect/token";
-    public readonly REGISTER_ENDPOINT: string = "/account/register";
-    public readonly REVOCATION_ENDPOINT: string = "/connect/revocation";
-    public readonly USERINFO_ENDPOINT: string = "/connect/userinfo";
-    public readonly CLIENT_ID: string = "careerHubApi";
-    public readonly CLIENT_SECRET: string = "secret";
-    public readonly GRANT_TYPE: string = "password";
-    public readonly SCOPE: string = "openid api";
+    
     public redirectUrl: string;
 
     /**
@@ -63,8 +54,8 @@ import { AuthHttp } from 'angular2-jwt';
     }
 
     public registeruser(firstname: string, lastname:string, username: string, password: string, confirmPassword: string): Observable<any> {
-        let registerEndpoint: string = this.REGISTER_ENDPOINT;
-        let baseURL: string =  this.AUTHORIZATION_URL;
+        let registerEndpoint: string = Config.REGISTER_ENDPOINT;
+        let baseURL: string =  Config.AUTHORIZATION_URL;
 
         let params: any = {
             Firstname: firstname,
@@ -89,16 +80,16 @@ import { AuthHttp } from 'angular2-jwt';
     }
 
     public login(username: string, password: string): Observable<any> {
-        let tokenEndpoint: string = this.TOKEN_ENDPOINT;
-        let baseURL: string = this.AUTHORIZATION_URL;
+        let tokenEndpoint: string = Config.TOKEN_ENDPOINT;
+        let baseURL: string = Config.AUTHORIZATION_URL;
 
         let params: any = {
-            client_id: this.CLIENT_ID,
-            grant_type: this.GRANT_TYPE,
+            client_id: Config.CLIENT_ID,
+            grant_type: Config.GRANT_TYPE,
             username: username,
             password: password,
-            scope: this.SCOPE,
-            client_secret: this.CLIENT_SECRET
+            scope: Config.SCOPE,
+            client_secret: Config.CLIENT_SECRET
         };
 
         let body: string = this.encodeParams(params);
@@ -192,10 +183,10 @@ import { AuthHttp } from 'angular2-jwt';
     public getNewToken(): Observable<any> {
         let refreshToken: string = Helpers.getToken('refresh_token');
 
-        let tokenEndpoint: string = this.TOKEN_ENDPOINT;
-        let baseURL: string = this.AUTHORIZATION_URL;
+        let tokenEndpoint: string = Config.TOKEN_ENDPOINT;
+        let baseURL: string = Config.AUTHORIZATION_URL;
         let params: any = {
-            client_id: this.CLIENT_ID,
+            client_id: Config.CLIENT_ID,
             grant_type: "refresh_token",
             refresh_token: refreshToken
         };
@@ -226,16 +217,16 @@ import { AuthHttp } from 'angular2-jwt';
 
     public revokeRefreshToken(): void {
         let refreshToken: string = Helpers.getToken('refresh_token');
-        let baseURL: string = this.AUTHORIZATION_URL;
+        let baseURL: string = Config.AUTHORIZATION_URL;
 
         if (refreshToken != null) {
-            let revocationEndpoint: string = this.REVOCATION_ENDPOINT;
+            let revocationEndpoint: string = Config.REVOCATION_ENDPOINT;
 
             let params: any = {
-                client_id: this.CLIENT_ID,
+                client_id: Config.CLIENT_ID,
                 token_type_hint: "refresh_token",
                 token: refreshToken,
-                client_secret: this.CLIENT_SECRET
+                client_secret: Config.CLIENT_SECRET
             };
 
             let body: string = this.encodeParams(params);
@@ -295,10 +286,10 @@ import { AuthHttp } from 'angular2-jwt';
      * Calls UserInfo endpoint to retrieve user's data.
      */
     private getUserInfo(): void {
-        let baseURL: string = this.AUTHORIZATION_URL;
+        let baseURL: string = Config.AUTHORIZATION_URL;
 
         if (this.tokenNotExpired()) {
-            this.authHttp.get(baseURL + this.USERINFO_ENDPOINT)
+            this.authHttp.get(baseURL + Config.USERINFO_ENDPOINT)
                 .subscribe(
                 (res: any) => {
                     let user: any = res.json();

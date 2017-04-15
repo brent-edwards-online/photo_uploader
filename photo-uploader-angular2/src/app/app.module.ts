@@ -18,6 +18,8 @@ import { AuthenticationRouteGuard } from './routeguards/authentication.routeguar
 import { ToasterModule, ToasterService} from 'angular2-toaster';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http } from '@angular/http';
+import { AboutComponent } from './about/about.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 // Set tokenGetter to use the same storage in AuthenticationService.Helpers.
 export function getAuthHttp(http: Http) {
@@ -36,7 +38,9 @@ export function getAuthHttp(http: Http) {
     ImageComponent,
     SearchResultsComponent,
     HomeComponent,
-    UploaderComponent
+    UploaderComponent,
+    AboutComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,

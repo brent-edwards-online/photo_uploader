@@ -11,25 +11,7 @@ import { MemberService } from '../service/member.service';
 })
 export class SearchResultsComponent implements OnInit {
   @Input() searchParams: SearchParams;
-  public searchResults: SearchResults[] = [
-    {
-      memberId: '8ad5e65b-5df0-4681-a8db-60bb2dff8e76',
-      firstname: 'Brent',
-      lastname: "Smith",
-      email: "brent.smith@bob.com",
-      phone: "0421585545",
-      image: "string"
-    },
-    {
-      memberId: '94ee74ce-787d-42b4-b16c-da120d79b103',
-      firstname: 'James',
-      lastname: "Jones",
-      email: "james@jones.co.uk",
-      phone: "02145785545",
-      image: "string"
-    }
-
-  ];
+  public searchResults: SearchResults[] = [];
 
   constructor(private memberService: MemberService) { 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { ToasterService, Toast } from 'angular2-toaster/angular2-toaster';
-import { Config } from '../config';
+import { ConfigAWS } from '../config.aws';
 import 'aws-sdk/dist/aws-sdk';
 
 @Component({
@@ -64,8 +64,8 @@ export class ImageComponent implements OnInit {
     let data = canvas.toDataURL('image/png');
     
     let AWSService = (<any>window).AWS;
-    AWSService.config.accessKeyId = Config.ACCESS_KEY;
-    AWSService.config.secretAccessKey = Config.ACCESS_KEY_SECRET
+    AWSService.config.accessKeyId = ConfigAWS.ACCESS_KEY;
+    AWSService.config.secretAccessKey = ConfigAWS.ACCESS_KEY_SECRET
     AWSService.config.region ='ap-southeast-2';
     let bucket = new AWSService.S3({params: {Bucket:'photo-uploader-images'}});
     let uploadParams = { Bucket: "photo-uploader-images", Key: "7AE0219D-B466-4B9E-B03A-B966B7DB38A0/profile.png", Body: data};
