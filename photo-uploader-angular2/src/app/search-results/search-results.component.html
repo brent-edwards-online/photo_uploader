@@ -15,10 +15,10 @@
                 <th>Phone</th>
               </tr>
             </thead>
-            <tbody *ngFor="let member of searchResults">
-              <tr (click)="getImage(member.memberId)">
-                <td>{{member.firstname}}</td>
-                <td>{{member.lastname}}</td>
+            <tbody *ngFor="let member of searchResults; let i = index">
+              <tr class="clickable-row" (click)="getImage(member.memberId, i)" [class.active]="i == selectedRow">
+                <td>{{member.firstName}}</td>
+                <td>{{member.lastName}}</td>
                 <td>{{member.email}}</td>
                 <td>{{member.phone}}</td>
               </tr>

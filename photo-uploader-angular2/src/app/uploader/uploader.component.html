@@ -6,6 +6,6 @@
   <toaster-container></toaster-container>
   -->
   <app-search-fields (searchParamsEvent)="searchData=$event"></app-search-fields>
-  <app-search-results [searchParams]='searchData'></app-search-results>
-  <app-image></app-image>
+  <app-search-results [searchParams]='searchData' (selectedMemberEvent)="selectedMember=$event"></app-search-results>
+  <app-image [member]='selectedMember'></app-image>
 </div>

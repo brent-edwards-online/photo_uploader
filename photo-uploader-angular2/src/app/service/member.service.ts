@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { SearchResults } from '../models/search-results.model';
 import { SearchParams } from '../models/search-params.model';
 import { Config } from '../config';
+import { AuthHttp } from 'angular2-jwt';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class MemberService {
@@ -50,13 +54,31 @@ export class MemberService {
 
 
 
-  constructor() { }
+  constructor(private authHttp: AuthHttp) { }
   
-  getMembers(searchParams: SearchParams) {
-    //return this.members.filter( m => m.firstname === searchParams.firstname)
-    let endPoint: string = Config.AUTHORIZATION_URL;
-    return this.authHttp.get( endPoint + '/api/qualification').map((res:Response) => res.json());
+  private addParameter(existing: String, fieldName:string, fieldValue:string) : string {
+    let param = fieldValue != '' ? fieldName + '=' + encodeURIComponent(fieldValue) : '';
+    param = param != '' && existing != ''? '&' + param : param;
+    return param;
   }
+
+  getMembers(searchParams: SearchParams) {
+    
+    let queryString: string = '';
+
+    queryString += this.addParameter(queryString, 'firstName', searchParams.firstname);
+    queryString += this.addParameter(queryString, 'lastName', searchParams.lastname);
+    queryString += this.addParameter(queryString, 'email', searchParams.email);
+    queryString += this.addParameter(queryString, 'phone', searchParams.phone);
+    
+    queryString = queryString != '' ? '?' + queryString : '';
+
+    let endPoint: string = Config.AUTHORIZATION_URL;
+    return this.authHttp.get( endPoint + '/api/member' + queryString).map((res:Response) => res.json());
+  }
+
+  
+
 
   saveImage() {
 
