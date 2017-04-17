@@ -22,7 +22,7 @@ export class AuthenticationRouteGuard implements CanActivate{
     var toast : Toast = {
     type: 'error',
     title: 'Route Disabled',
-    body: 'You must sign in before you can access this page',
+    body: 'You must login before you can access this page',
     showCloseButton: true,
     };
     this.toasterService.pop(toast);
